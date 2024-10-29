@@ -1,39 +1,70 @@
 "use client";
-import { menuItems } from "@/interfaces/navbar-items";
+import { useEffect, useState } from "react";
+import { IMenuItems } from "@/interfaces/navbar-items";
 import { IoCart } from "react-icons/io5";
 import Link from "next/link";
-import { useState } from "react";
 
 const Navbar = () => {
-  const menuItems: menuItems[] = [
-    {
-      name: "Produtos",
-      path: "/produtos",
-    },
-  ];
-  const [quantityCart, setQuantityCart] = useState(1);
+  const [categorias, setCategorias] = useState<IMenuItems[]>([]);
+  const [quantityCart, setQuantityCart] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [index, setIndex] = useState(0);
+
+  const fetchCategorias = async () => {
+    const response = await fetch("/api/categorias");
+    const data = await response.json();
+    setCategorias(data);
+    console.log(data);
+  };
+  const fetchCarrinho = async () => {
+    const response = await fetch("/api/carrinho");
+    const data = await response.json();
+    setQuantityCart(data.length);
+  };
+
+  useEffect(() => {
+    try {
+      fetchCategorias();
+      fetchCarrinho();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
   return (
     <header className="sticky flex w-full items-center justify-center bg-white text-black">
-      <nav className="flex w-full max-w-7xl items-center justify-between p-4">
-        <div className="flex items-center gap-6">
-          <Link href={"/"} className="text-2xl font-bold">
-            My Portfolio
-          </Link>
+      <nav className="sticky top-0 w-full">
+        <div className="flex w-full items-center justify-between border-b border-zinc-300 bg-white p-4">
+          <Link href={"/"}>HS_STORRR</Link>
+          {loading ? null : (
+            <Link href={"/carrinho"} className="relative">
+              <IoCart size={30} />
+              {quantityCart > 0 && (
+                <span className="absolute -right-0 -top-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  {quantityCart}
+                </span>
+              )}
+            </Link>
+          )}
         </div>
-        <div className="flex items-center gap-2 text-2xl text-zinc-500">
-          <Link href={"/produtos"}>Produtos</Link>
-          <Link
-            href={"/carrinho"}
-            className="flex items-center rounded-md border-2 border-zinc-500 px-2 py-1.5 text-base font-medium"
-          >
-            <IoCart />
-            Carrinho
-            {quantityCart > 0 && (
-              <span className="ml-1 rounded-full border-2 border-red-500 px-2 py-1 text-xs text-red-500">
-                {quantityCart}
-              </span>
-            )}
-          </Link>
+        <div className="w-full overflow-hidden">
+          {loading ? null : (
+            <div className="custom-scrollbar flex space-x-4 overflow-x-auto px-4 py-2 text-sm">
+              {categorias.map((item, i) => (
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  className={`whitespace-nowrap font-semibold uppercase ${
+                    index === i ? "border-b-2 border-zinc-900" : ""
+                  }`}
+                  onClick={() => setIndex(i)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
     </header>

@@ -75,4 +75,25 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  /* Personaliza a barra de rolagem horizontal */
+  .custom-scrollbar {
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #4b5563 #e5e7eb; /* Cor da barra e do fundo */
+  }
+
+  /* Para navegadores baseados em WebKit (Chrome, Safari, Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px; /* Altura da barra horizontal */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #e5e7eb; /* Fundo da trilha */
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* Cor da barra */
+    border-radius: 4px;
+    border: 2px solid #e5e7eb; /* Espaço entre a barra e a trilha */
+  }
 }
