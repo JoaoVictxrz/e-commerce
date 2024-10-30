@@ -2,11 +2,11 @@ import { IMenuItems } from "@/interfaces/navbar-items";
 import { NextResponse } from "next/server";
 
 const menuItems: IMenuItems[] = [
-  { id: 1, name: "camisetas", path: "/produtos" },
-  { id: 2, name: "camisas", path: "/camisas" },
-  { id: 3, name: "camisas-peruanas", path: "/produtos" },
-  { id: 4, name: "shorts", path: "/produtos" },
-  { id: 5, name: "shorts-peruanos", path: "/produtos" },
+  { id: 1, name: "Peruanas", path: "/produtos" },
+  { id: 2, name: "Gola Polo", path: "/produtos" },
+  { id: 3, name: "Italianas", path: "/produtos" },
+  { id: 4, name: "Shorts jeans", path: "/produtos" },
+  { id: 5, name: "Shorts Tectel", path: "/produtos" },
 ];
 
 export async function GET() {
