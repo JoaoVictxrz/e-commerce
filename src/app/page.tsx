@@ -1,9 +1,11 @@
+import Carrosel from "@/components/carrossel";
+import Products from "@/components/products";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Hello</h1>
+    <main>
+      <Carrosel />
     </main>
   );
 }
