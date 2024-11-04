@@ -1,8 +1,6 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { IProducts } from "@/interfaces/produtos";
-import { useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
+import { Container } from "./container";
 
 const Products = () => {
   const produtos: IProducts[] = [
@@ -77,96 +75,15 @@ const Products = () => {
       promocional: true,
     },
   ];
-  const [produtosFiltrados, setProdutosFiltrados] = useState<IProducts[]>([]);
-  const [busca, setBusca] = useState("");
-  const [maximo, setMaximo] = useState(6);
-
-  const buscar = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBusca(e.target.value);
-    setProdutosFiltrados(
-      produtos.filter((p) =>
-        p.nome.toLowerCase().includes(busca.toLowerCase()),
-      ),
-    );
-  };
-  useEffect(() => {
-    if (busca === "") {
-      setProdutosFiltrados(produtos);
-    }
-  }, [produtosFiltrados]);
 
   return (
-    <div>
-      <div className="flex w-full items-center justify-between px-2 pt-2">
-        <div className="text-2xl uppercase">Produtos</div>
-        <form action="" className="flex items-center">
-          <Input
-            type="text"
-            onChange={buscar}
-            placeholder="Pesquisar"
-            className="mr-2"
-          />
-          <button type="submit" value={busca}>
-            <CiSearch size={30} />
-          </button>
-        </form>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        {produtosFiltrados.length > 0
-          ? produtosFiltrados.map((p) => (
-              <div
-                key={p.nome}
-                className="flex w-full flex-col items-center justify-between text-center"
-              >
-                <img
-                  src={p.imagem}
-                  alt=""
-                  className="h-24 w-full object-contain"
-                />
-                <div className="line-clamp-2 text-xl">{p.nome}</div>
-                <div className="text-xl">{p.preco}</div>
-              </div>
-            ))
-          : produtos.map(
-              (p, i) =>
-                i < maximo && (
-                  <div
-                    key={p.nome}
-                    className="flex w-full flex-col items-center justify-between text-center"
-                  >
-                    <img
-                      src={p.imagem}
-                      alt=""
-                      className="h-24 w-full object-contain"
-                    />
-                    <div className="line-clamp-2 text-xl">{p.nome}</div>
-                    <div className="text-xl">{p.preco}</div>
-                  </div>
-                ),
-            )}
-        {/* {produtos.map(
-          (p, i) =>
-            i < maximo && (
-              <div
-                key={p.nome}
-                className="flex w-full flex-col items-center justify-between text-center"
-              >
-                <img
-                  src={p.imagem}
-                  alt=""
-                  className="h-24 w-full object-contain"
-                />
-                <div className="line-clamp-2 text-xl">{p.nome}</div>
-                <div className="text-xl">{p.preco}</div>
-              </div>
-            ),
-        )} */}
-      </div>
-      {maximo < produtos.length ? (
-        <button onClick={() => setMaximo(produtos.length)}> test</button>
-      ) : (
-        <button onClick={() => setMaximo(6)}>test</button>
-      )}
+    <div className="h-screen w-full bg-black">
+      <Container>
+        <div className="flex w-full items-center justify-between px-2 pt-2">
+          <div className="text-xl uppercase">Produtos</div>
+        </div>
+        <div className="grid grid-cols-2 gap-4 pt-5 md:grid-cols-4"></div>
+      </Container>
     </div>
   );
 };
