@@ -77,12 +77,24 @@ const Products = () => {
   ];
 
   return (
-    <div className="h-screen w-full bg-black">
+    <div className="h-screen w-full bg-white text-black">
       <Container>
-        <div className="flex w-full items-center justify-between px-2 pt-2">
-          <div className="text-xl uppercase">Produtos</div>
+        <div className="p-2 text-xl font-semibold uppercase">Novidades</div>
+        <div className="custom-scrollbar flex space-x-4 overflow-x-auto px-4">
+          {produtos.map((item, index) => (
+            <div className="relative m-2" key={item.nome}>
+              <div className="m-2 h-48 w-48">
+                <img
+                  src={item.imagem}
+                  alt={item.nome}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="text-center">{item.nome}</div>
+              <div className="text-center">{item.preco}</div>
+            </div>
+          ))}
         </div>
-        <div className="grid grid-cols-2 gap-4 pt-5 md:grid-cols-4"></div>
       </Container>
     </div>
   );
