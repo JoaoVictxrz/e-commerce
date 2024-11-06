@@ -1,15 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { IMenuItems } from "@/interfaces/navbar-items";
-import {
-  IoCart,
-  IoClose,
-  IoCloseCircle,
-  IoCloseOutline,
-} from "react-icons/io5";
+import { IoCart, IoCloseOutline } from "react-icons/io5";
 import Link from "next/link";
 import Busca from "./busca";
-import { CiSearch, CiShoppingCart } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
   const [categoriaAtiva, setCategoriaAtiva] = useState<number | null>(null);
@@ -107,7 +102,7 @@ const Navbar = () => {
         <div className="w-full overflow-hidden">
           {loading ? null : (
             <div className="custom-scrollbar flex space-x-4 overflow-x-auto px-4 py-2 text-sm md:justify-center md:space-x-6">
-              {categorias.map((item, i) => (
+              {categorias.map((item) => (
                 <Link
                   key={item.id}
                   href={{
