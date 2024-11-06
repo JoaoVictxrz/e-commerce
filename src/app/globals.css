@@ -78,7 +78,7 @@ body {
   /* Personaliza a barra de rolagem horizontal */
   .custom-scrollbar {
     scrollbar-width: thin; /* Para Firefox */
-    scrollbar-color: #4b5563 #e5e7eb; /* Cor da barra e do fundo */
+    scrollbar-color: #000 #e5e7eb; /* Cor da barra e do fundo */
   }
 
   /* Para navegadores baseados em WebKit (Chrome, Safari, Edge) */
@@ -92,7 +92,7 @@ body {
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #4b5563; /* Cor da barra */
+    background-color: #000; /* Cor da barra */
     border-radius: 4px;
     border: 2px solid #e5e7eb; /* Espaço entre a barra e a trilha */
   }
