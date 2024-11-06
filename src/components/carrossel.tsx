@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const Carrosel = () => {
@@ -25,7 +26,7 @@ const Carrosel = () => {
         style={{ transform: `translateX(-${currentImage * 100}%)` }}
       >
         {images.map((img, index) => (
-          <img
+          <Image
             key={index}
             src={img.image}
             alt=""
