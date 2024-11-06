@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ImagemInicial = () => {
   return (
-    <div className="w-full overflow-hidden md:h-screen">
+    <div className="w-full overflow-hidden">
       <div className="">
         <Image
           src="https://static.pingendo.com/cover-bubble-dark.svg"
