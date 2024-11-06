@@ -1,13 +1,11 @@
-import Carrosel from "@/components/carrossel";
 import ImagemInicial from "@/components/imagem-inicial";
-import Products from "@/components/products";
-import Image from "next/image";
+import Novidades from "@/components/novidades";
 
 export default function Home() {
   return (
     <main>
       <ImagemInicial />
-      <Products />
+      <Novidades />
     </main>
   );
 }
