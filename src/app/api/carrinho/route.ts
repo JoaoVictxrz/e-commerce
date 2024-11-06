@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCarrinhoService } from "@/services/carrinho/get-carrinho-service";
 import { setCarrinho } from "@/services/carrinho/set-carrinho-service";
+import { ICarrinho } from "@/interfaces/carrinho";
 
 export async function GET() {
   const carrinho = getCarrinhoService();
@@ -19,8 +20,8 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 
-  let carrinho = getCarrinhoService();
-  carrinho = carrinho.filter((item: any) => item.id !== id);
+  let carrinho: ICarrinho[] = getCarrinhoService();
+  carrinho = carrinho.filter((item) => item.produto.id !== parseInt(id!));
   setCarrinho(carrinho);
 
   return NextResponse.json(carrinho);
