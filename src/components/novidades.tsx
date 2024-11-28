@@ -108,7 +108,7 @@ const Novidades = () => {
       <Container>
         <div className="p-2 text-xl font-semibold uppercase">Novidades</div>
         <div
-          className="custom-scrollbar flex space-x-6 overflow-hidden overflow-x-auto px-4"
+          className="custom-scrollbar flex gap-5 space-x-8 overflow-hidden overflow-x-auto py-4 pb-5"
           ref={carouselRef}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
