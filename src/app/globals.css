@@ -84,6 +84,7 @@ body {
   /* Para navegadores baseados em WebKit (Chrome, Safari, Edge) */
   .custom-scrollbar::-webkit-scrollbar {
     height: 8px; /* Altura da barra horizontal */
+    width: 8px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
