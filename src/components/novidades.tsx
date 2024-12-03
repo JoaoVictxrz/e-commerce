@@ -2,83 +2,11 @@
 import { IProducts } from "@/interfaces/produtos";
 import { Container } from "./container";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Novidades = () => {
-  const produtos: IProducts[] = [
-    {
-      nome: "Camiseta Básica Feminina",
-      preco: 49.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Feminino",
-      promocional: false,
-    },
-    {
-      nome: "Calça Jeans Slim Masculina",
-      preco: 129.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Masculino",
-      promocional: true,
-    },
-    {
-      nome: "Jaqueta Jeans Unissex",
-      preco: 199.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Unissex",
-      promocional: false,
-    },
-    {
-      nome: "Vestido Infantil Floral",
-      preco: 89.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Infantil",
-      promocional: true,
-    },
-    {
-      nome: "Blusa de Moletom Unissex",
-      preco: 119.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Unissex",
-      promocional: false,
-    },
-    {
-      nome: "Saia Midi Feminina",
-      preco: 69.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Feminino",
-      promocional: true,
-    },
-    {
-      nome: "Short Jeans Infantil",
-      preco: 59.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Infantil",
-      promocional: false,
-    },
-    {
-      nome: "Camisa Social Masculina",
-      preco: 99.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Masculino",
-      promocional: true,
-    },
-    {
-      nome: "Blazer Feminino",
-      preco: 149.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Feminino",
-      promocional: false,
-    },
-    {
-      nome: "Calça Legging Unissex",
-      preco: 39.9,
-      imagem: "https://static.pingendo.com/cover-bubble-dark.svg",
-      categoria: "Unissex",
-      promocional: true,
-    },
-  ];
-
   const [isDragging, setIsDragging] = useState(false);
+  const [produtos, setProdutos] = useState<IProducts[]>([]);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [startX, setStartX] = useState(0);
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -103,6 +31,25 @@ const Novidades = () => {
     }
   };
 
+  const fetchProdutos = async () => {
+    try {
+      const response = await fetch("/api/produtos?new=true", { method: "GET" });
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar produtos");
+      }
+
+      const data = await response.json();
+
+      setProdutos(data);
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProdutos();
+  }, []);
   return (
     <div className="w-full bg-white text-black">
       <Container>
