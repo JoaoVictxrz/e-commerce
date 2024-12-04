@@ -50,24 +50,26 @@ const Produtos = () => {
         <div className="p-2 pb-10 text-xl font-semibold uppercase">
           Produtos
         </div>
-        <div className="flex h-full w-full flex-1 flex-col justify-between md:flex-row">
-          <div className="flex h-2/4 w-full items-center overflow-x-auto bg-yellow-200 md:max-w-40 md:flex-col md:overflow-hidden">
+        <div className="flex h-full w-full flex-col md:flex-row">
+          {/* Barra lateral de pesquisa */}
+          <div className="flex h-1/4 w-full items-center overflow-x-auto md:h-full md:w-1/4 md:flex-col md:overflow-hidden">
             {categorias.map((item) => (
               <div
                 key={item.id}
-                className={`z-0 flex min-w-[150px] cursor-pointer justify-center gap-2 py-2 text-sm font-medium uppercase transition-all hover:scale-110 hover:border-b-2 hover:border-zinc-500 md:hover:pl-5 ${
+                className={`z-0 ml-5 flex min-w-[150px] cursor-pointer justify-start gap-2 py-2 text-sm font-medium uppercase transition-all hover:scale-110 md:hover:pl-5 ${
                   item.id === categoriaAtiva
-                    ? "border-b border-zinc-500 text-zinc-500"
+                    ? "scale-105 font-semibold md:pl-5"
                     : ""
                 }`}
                 onClick={() => handleCategoriaClick(item.id)}
               >
-                <span className="font-medium">{item.name}</span>
+                <span>{item.name}</span>
               </div>
             ))}
           </div>
-          {/* Produtos */}
-          <div className="custom-scrollbar grid items-center gap-5 overflow-hidden overflow-y-auto bg-red-500 py-4 pb-5 sm:grid-cols-2 xl:grid-cols-3">
+
+          {/* Área de exibição de produtos */}
+          <div className="custom-scrollbar grid w-full items-center gap-5 overflow-hidden overflow-y-auto p-4 py-4 pb-5 sm:grid-cols-2 md:w-3/4 xl:grid-cols-3">
             {produtos?.map((item, i) => (
               <div
                 className="m-2 flex flex-col items-center justify-between rounded border py-5 shadow-[rgba(0,0,5,0.2)_2px_4px_2px_0px] transition-transform hover:scale-110 hover:cursor-pointer"
