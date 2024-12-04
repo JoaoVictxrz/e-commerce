@@ -51,7 +51,7 @@ const Novidades = () => {
     fetchProdutos();
   }, []);
   return (
-    <div className="w-full bg-white text-black">
+    <div className="w-full bg-white text-black" id="novidades">
       <Container>
         <div className="p-2 text-xl font-semibold uppercase">Novidades</div>
         <div
