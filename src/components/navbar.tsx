@@ -1,47 +1,57 @@
 "use client";
 import { useEffect, useState } from "react";
-import { IMenuItems } from "@/interfaces/navbar-items";
 import { IoCart, IoCloseOutline } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Busca from "./busca";
-import { CiSearch } from "react-icons/ci";
+
+interface INavbarItems {
+  id: number;
+  name: string;
+  path: string;
+}
 
 const Navbar = () => {
   const [categoriaAtiva, setCategoriaAtiva] = useState<number | null>(null);
   const [quantityCart, setQuantityCart] = useState(0);
-  const [categorias, setCategorias] = useState<IMenuItems[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  const formatar = (text: string) => {
-    return text
-      .split(" ")
-      .map((word) => word.charAt(0).toLocaleLowerCase() + word.slice(1))
-      .join("-");
-  };
-
-  const fetchCategorias = async () => {
-    const response = await fetch("/api/categorias");
-    const data = await response.json();
-    setCategorias(data);
-  };
+  const navbarItems: INavbarItems[] = [
+    {
+      id: 1,
+      name: "Produtos",
+      path: "/produtos",
+    },
+    {
+      id: 2,
+      name: "novidades",
+      path: "#novidades",
+    },
+  ];
   const fetchCarrinho = async () => {
     const response = await fetch("/api/carrinho");
     const data = await response.json();
     setQuantityCart(data.length);
   };
 
-  const handleCategoriaClick = (id: number) => {
+  const handleCategoriaClick = (id: number, path: string) => {
     setCategoriaAtiva(id);
-    localStorage.setItem("categoriaAtiva", id.toString());
+    if (path === "#novidades") {
+      router.push(`/${path}`); // Redireciona para a rota raiz com o hash
+    } else {
+      router.push(path); // Redireciona para outras rotas normalmente
+    }
   };
+
   const handleNullClick = () => {
     localStorage.setItem("categoriaAtiva", "null");
   };
 
   useEffect(() => {
     try {
-      fetchCategorias();
       fetchCarrinho();
     } catch (error) {
       console.log(error);
@@ -102,22 +112,18 @@ const Navbar = () => {
         <div className="w-full overflow-hidden">
           {loading ? null : (
             <div className="custom-scrollbar flex space-x-4 overflow-x-auto px-4 py-2 text-sm md:justify-center md:space-x-6">
-              {categorias.map((item) => (
-                <Link
+              {navbarItems.map((item) => (
+                <button
                   key={item.id}
-                  href={{
-                    pathname: "/produtos",
-                    query: { categoria: formatar(item.name) },
-                  }}
                   className={`whitespace-nowrap font-semibold uppercase ${
                     item.id === categoriaAtiva
                       ? "border-b border-zinc-500 text-zinc-500"
                       : ""
                   }`}
-                  onClick={() => handleCategoriaClick(item.id)}
+                  onClick={() => handleCategoriaClick(item.id, item.path)}
                 >
                   {item.name}
-                </Link>
+                </button>
               ))}
             </div>
           )}
