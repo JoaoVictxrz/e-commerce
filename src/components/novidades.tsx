@@ -68,7 +68,7 @@ const Novidades = () => {
               className="m-2 flex flex-col justify-between rounded border shadow-[rgba(0,0,5,0.2)_2px_4px_2px_0px] transition-transform hover:scale-110 hover:cursor-pointer"
               key={i}
             >
-              <div className="m-2 h-64 w-56 bg-black">
+              <div className="m-2 h-80 w-72 bg-black">
                 <Image
                   src={item.imagem}
                   alt={item.nome}
@@ -78,10 +78,10 @@ const Novidades = () => {
                 />
               </div>
               <div className="flex h-1/4 flex-col justify-between pb-2">
-                <div className="h-3/4 text-center text-xl font-bold">
+                <div className="h-2/4 text-center text-xl font-bold">
                   {item.nome}
                 </div>
-                <div className="h-1/4 pb-2 text-center text-xl font-medium">
+                <div className="h-2/4 pb-2 text-center text-xl font-medium">
                   R${item.preco}0
                 </div>
               </div>
