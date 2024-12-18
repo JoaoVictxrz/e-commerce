@@ -1,6 +1,6 @@
+import Footer from "@/components/footer";
 import ImagemInicial from "@/components/imagem-inicial";
 import Novidades from "@/components/novidades";
-import Produtos from "@/components/produtos";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <ImagemInicial />
       <div className="flex flex-col gap-5">
         <Novidades />
-        <Produtos />
+        <Footer />
       </div>
     </main>
   );
