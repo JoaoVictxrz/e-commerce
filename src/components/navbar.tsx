@@ -30,6 +30,16 @@ const Navbar = () => {
       name: "novidades",
       path: "#novidades",
     },
+    {
+      id: 3,
+      name: "sobre nós",
+      path: "/sobre-nos",
+    },
+    {
+      id: 4,
+      name: "contato",
+      path: "/contato",
+    },
   ];
   const fetchCarrinho = async () => {
     const response = await fetch("/api/carrinho");
@@ -39,8 +49,9 @@ const Navbar = () => {
 
   const handleCategoriaClick = (id: number, path: string) => {
     setCategoriaAtiva(id);
+    localStorage.setItem("categoriaAtiva", `${categoriaAtiva}`);
     if (path === "#novidades") {
-      router.push(`/${path}`); // Redireciona para a rota raiz com o hash
+      router.push(`/${path}`);
     } else {
       router.push(path); // Redireciona para outras rotas normalmente
     }
