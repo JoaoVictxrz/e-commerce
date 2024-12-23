@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Busca from "./busca";
+import { IProducts } from "@/interfaces/produtos";
 
 interface INavbarItems {
   id: number;
@@ -41,11 +42,6 @@ const Navbar = () => {
       path: "/contato",
     },
   ];
-  const fetchCarrinho = async () => {
-    const response = await fetch("/api/carrinho");
-    const data = await response.json();
-    setQuantityCart(data.length);
-  };
 
   const handleCategoriaClick = (id: number, path: string) => {
     setCategoriaAtiva(id);
@@ -63,7 +59,24 @@ const Navbar = () => {
 
   useEffect(() => {
     try {
-      fetchCarrinho();
+      const handleCartUpdate = () => {
+        const cart = JSON.parse(localStorage.getItem("carrinho") || "[]");
+
+        if (!Array.isArray(cart)) {
+          console.error("cart is not an array");
+          setQuantityCart(0);
+          return;
+        }
+        const totalItemCart = cart
+          .map((item: IProducts) => item.quantidade || 0)
+          .reduce((a, b) => a + b, 0);
+        setQuantityCart(totalItemCart);
+      };
+
+      window.addEventListener("cartUpdated", handleCartUpdate);
+      return () => {
+        window.removeEventListener("cartUpdated", handleCartUpdate);
+      };
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,7 +93,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white text-black shadow-md">
-      <nav className="w-full">
+      <nav className="fixed w-full bg-white">
         <div>
           {open ? (
             <div className="flex w-full items-center justify-between gap-2 px-1 py-2 opacity-100 transition-opacity duration-300 ease-in-out">
