@@ -27,6 +27,44 @@ const Produtos = () => {
     setProdutos(data);
   };
 
+  const addCartItem = async (item: IProducts, quantityProduct: number) => {
+    const carrinho: IProducts[] = JSON.parse(
+      localStorage.getItem("carrinho") || "[]",
+    );
+
+    // Verifica se o produto já está no carrinho
+    const existingItem = carrinho.find((i) => i.id === item.id);
+
+    if (existingItem) {
+      // Verifica se a quantidade total excede o estoque máximo
+      if (existingItem.quantidade + quantityProduct > item.estoque.maximo) {
+        console.log("Quantidade insuficiente para adicionar ao carrinho.");
+        return;
+      }
+
+      // Incrementa a quantidade do produto no carrinho
+      existingItem.quantidade += quantityProduct;
+      console.log("Quantidade atualizada no carrinho.");
+    } else {
+      // Verifica se a quantidade solicitada está dentro dos limites do estoque
+      if (quantityProduct > item.estoque.maximo) {
+        console.log("Quantidade insuficiente para adicionar ao carrinho.");
+        return;
+      }
+
+      // Adiciona o novo produto ao carrinho
+      const newItem = { ...item, quantidade: quantityProduct }; // Cria uma nova cópia com quantidade
+      carrinho.push(newItem);
+      console.log("Produto adicionado ao carrinho.");
+    }
+
+    // Atualiza o localStorage com o carrinho atualizado
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    // Dispara o evento para atualizar o carrinho na interface
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+
   useEffect(() => {
     try {
       fetchCategorias();
@@ -52,7 +90,7 @@ const Produtos = () => {
         </div>
         <div className="flex h-full w-full flex-col md:flex-row">
           {/* Barra lateral de pesquisa */}
-          <div className="custom-scrollbar flex h-1/4 w-full items-center overflow-x-auto overflow-y-hidden md:h-full md:w-1/4 md:flex-col md:overflow-hidden">
+          <div className="custom-scrollbar fixed left-0 top-16 z-10 mt-6 flex h-16 w-full items-center overflow-x-auto overflow-y-hidden bg-white shadow-md md:relative md:left-auto md:top-auto md:h-full md:w-1/4 md:flex-col md:overflow-hidden">
             {categorias.map((item) => (
               <div
                 key={item.id}
@@ -75,7 +113,10 @@ const Produtos = () => {
                 className="m-2 flex flex-col items-center justify-between rounded border py-5 shadow-[rgba(0,0,5,0.2)_2px_4px_2px_0px] transition-transform hover:scale-110 hover:cursor-pointer"
                 key={i}
               >
-                <div className="m-2 h-72 w-64 bg-black">
+                <div
+                  className="m-2 h-72 w-64 bg-black"
+                  onClick={() => addCartItem(item, 1)}
+                >
                   <Image
                     src={item.imagem}
                     alt={item.nome}
