@@ -21,6 +21,7 @@ const produtos: IProducts[] = [
     tamanho: "M",
     dataCriacao: new Date("2024-11-01"),
     disponivel: true,
+    quantidade: 20,
   },
   {
     id: 2,
@@ -37,6 +38,7 @@ const produtos: IProducts[] = [
     tamanho: "G",
     dataCriacao: new Date("2024-11-15"),
     disponivel: true,
+    quantidade: 50,
   },
   {
     id: 3,
@@ -57,6 +59,7 @@ const produtos: IProducts[] = [
     tamanho: "GG",
     dataCriacao: new Date("2024-10-30"),
     disponivel: true,
+    quantidade: 25,
   },
   {
     id: 4,
@@ -72,6 +75,7 @@ const produtos: IProducts[] = [
     tamanho: "M",
     dataCriacao: new Date("2024-09-25"),
     disponivel: true,
+    quantidade: 30,
   },
   {
     id: 5,
@@ -92,6 +96,7 @@ const produtos: IProducts[] = [
     tamanho: "P",
     dataCriacao: new Date("2024-08-15"),
     disponivel: true,
+    quantidade: 60,
   },
   {
     id: 6,
@@ -111,6 +116,7 @@ const produtos: IProducts[] = [
     tamanho: "M",
     dataCriacao: new Date("2024-11-10"),
     disponivel: true,
+    quantidade: 20,
   },
   {
     id: 7,
@@ -126,6 +132,7 @@ const produtos: IProducts[] = [
     tamanho: "G",
     dataCriacao: new Date("2024-10-05"),
     disponivel: true,
+    quantidade: 40,
   },
   {
     id: 8,
@@ -145,6 +152,7 @@ const produtos: IProducts[] = [
     tamanho: "GG",
     dataCriacao: new Date("2024-09-25"),
     disponivel: true,
+    quantidade: 15,
   },
   {
     id: 9,
@@ -160,6 +168,7 @@ const produtos: IProducts[] = [
     tamanho: "M",
     dataCriacao: new Date("2024-10-10"),
     disponivel: true,
+    quantidade: 20,
   },
   {
     id: 10,
@@ -179,6 +188,7 @@ const produtos: IProducts[] = [
     tamanho: "G",
     dataCriacao: new Date("2024-08-20"),
     disponivel: true,
+    quantidade: 10,
   },
 ];
 
