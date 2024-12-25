@@ -72,7 +72,7 @@ const Navbar = () => {
           .reduce((a, b) => a + b, 0);
         setQuantityCart(totalItemCart);
       };
-
+      handleCartUpdate();
       window.addEventListener("cartUpdated", handleCartUpdate);
       return () => {
         window.removeEventListener("cartUpdated", handleCartUpdate);
@@ -92,15 +92,18 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white text-black shadow-md">
-      <nav className="fixed w-full bg-white">
+    <header className="w-full text-black shadow-md md:w-40">
+      <nav className="fixed z-50 w-full bg-white">
         <div>
           {open ? (
             <div className="flex w-full items-center justify-between gap-2 px-1 py-2 opacity-100 transition-opacity duration-300 ease-in-out">
               <div className="w-full">
                 <Busca />
               </div>
-              <div onClick={() => setOpen(!open)}>
+              <div
+                onClick={() => setOpen(!open)}
+                className="hover:cursor-pointer"
+              >
                 <IoCloseOutline size={32} color="black" />
               </div>
             </div>
@@ -117,7 +120,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center gap-2">
                 {/* Busca */}
-                <div className="md:hidden">
+                <div className="hover:cursor-pointer md:hidden">
                   <CiSearch size={30} onClick={() => setOpen(!open)} />
                 </div>
                 {/* Carrinho */}
