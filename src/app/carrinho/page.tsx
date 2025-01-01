@@ -18,7 +18,7 @@ const Carrinho = () => {
 
   return (
     <div className="h-screen w-full bg-white text-black">
-      <Container className="flex h-full w-full flex-col sm:flex-row">
+      <Container className="flex h-full w-full flex-col pt-10 sm:flex-row">
         {carrinho.length > 0 ? (
           <div className="mt-15 flex w-full flex-col gap-4">
             {carrinho.map((item, index) => (
