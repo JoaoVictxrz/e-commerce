@@ -1,8 +1,8 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Container } from "@/components/container";
 import { IProducts } from "@/interfaces/produtos";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const Carrinho = () => {
   const [carrinho, setCarrinho] = useState<IProducts[]>([]);

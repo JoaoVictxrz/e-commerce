@@ -15,7 +15,7 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Contact Me
+            Contato
           </h2>
           <p className="mt-4 text-lg text-gray-500">
             {`Let's connect! Find me on these platforms`}
